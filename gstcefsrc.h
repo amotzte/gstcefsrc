@@ -40,7 +40,6 @@ struct _GstCefSrc {
   gchar *chromeExtraFlags;
 
   gboolean gpu;
-  gint chromium_debug_port;
   CefRefPtr<CefBrowser> browser;
   CefRefPtr<CefApp> app;
 
