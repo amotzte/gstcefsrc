@@ -763,9 +763,9 @@ gst_cef_src_class_init (GstCefSrcClass * klass)
           DEFAULT_GPU, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
 
   g_object_class_install_property (gobject_class, PROP_CHROME_EXTRA_FLAGS,
-                                   g_param_spec_string ("chromeExtraFlags", "chromeExtraFlags",
-                                   "Comma delimiter flags to be passed into chrome (Example: show-fps-counter,remote-debugging-port=9222)",
-                                   nullptr, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
+    g_param_spec_string ("chromeExtraFlags", "chromeExtraFlags",
+          "Comma delimiter flags to be passed into chrome (Example: show-fps-counter,remote-debugging-port=9222)",
+          nullptr, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
 
   gst_element_class_set_static_metadata (gstelement_class,
       "Chromium Embedded Framework source", "Source/Video",
