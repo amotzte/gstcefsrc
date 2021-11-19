@@ -324,9 +324,9 @@ class App : public CefApp
       command_line->AppendSwitch("disable-gpu");
       command_line->AppendSwitch("disable-gpu-compositing");
     }
-    
-    if (src->chromeExtraFlags) {
-        gchar ** flagsList = g_strsplit((const gchar *) src->chromeExtraFlags, ",", -1);
+
+    if (src->chrome_extra_flags) {
+        gchar ** flagsList = g_strsplit((const gchar *) src->chrome_extra_flags, ",", -1);
         for (guint i=0 ; i<g_strv_length (flagsList) ; i++) {
 
             gchar ** switchValue = g_strsplit((const gchar *) flagsList[i], "=", -1);
@@ -668,14 +668,9 @@ gst_cef_src_set_property (GObject * object, guint prop_id, const GValue * value,
       break;
     }
     case PROP_CHROME_EXTRA_FLAGS: {
-        const gchar* chromeExtraFlags = g_value_get_string (value);
-        if (!src->chromeExtraFlags) {
-            src->chromeExtraFlags = g_strdup(chromeExtraFlags);
-        }
-        else {
-            GST_WARNING("Can't set chrome flags after start");
-        }
-        break;
+      const gchar* chromeExtraFlags = g_value_get_string (value);
+      src->chrome_extra_flags = g_strdup(chromeExtraFlags);
+      break;
     }
     case PROP_GPU:
     {
@@ -765,9 +760,9 @@ gst_cef_src_class_init (GstCefSrcClass * klass)
           DEFAULT_GPU, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
 
   g_object_class_install_property (gobject_class, PROP_CHROME_EXTRA_FLAGS,
-                                   g_param_spec_string ("chromeExtraFlags", "chromeExtraFlags",
+                                   g_param_spec_string ("chrome_extra_flags", "chrome_extra_flags",
                                    "Comma delimiter flags to be passed into chrome (Example: show-fps-counter,remote-debugging-port=9222)",
-                                   nullptr, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT)));
+                                   nullptr, (GParamFlags) (GST_PARAM_MUTABLE_READY)));
 
   gst_element_class_set_static_metadata (gstelement_class,
       "Chromium Embedded Framework source", "Source/Video",

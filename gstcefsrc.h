@@ -37,7 +37,7 @@ struct _GstCefSrc {
   guint64 n_frames;
   gulong cef_work_id;
   gchar *url;
-  gchar *chromeExtraFlags;
+  gchar *chrome_extra_flags;
 
   gboolean gpu;
   CefRefPtr<CefBrowser> browser;
