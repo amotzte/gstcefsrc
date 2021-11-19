@@ -668,8 +668,8 @@ gst_cef_src_set_property (GObject * object, guint prop_id, const GValue * value,
       break;
     }
     case PROP_CHROME_EXTRA_FLAGS: {
-      const gchar* chromeExtraFlags = g_value_get_string (value);
-      src->chrome_extra_flags = g_strdup(chromeExtraFlags);
+      const gchar* chrome_extra_flags = g_value_get_string (value);
+      src->chrome_extra_flags = g_strdup(chrome_extra_flags);
       break;
     }
     case PROP_GPU:
@@ -692,6 +692,9 @@ gst_cef_src_get_property (GObject * object, guint prop_id, GValue * value,
   switch (prop_id) {
     case PROP_URL:
       g_value_set_string (value, src->url);
+      break;
+    case PROP_CHROME_EXTRA_FLAGS:
+      g_value_set_string (value, src->chrome_extra_flags);
       break;
     case PROP_GPU:
       g_value_set_boolean (value, src->gpu);
@@ -760,9 +763,9 @@ gst_cef_src_class_init (GstCefSrcClass * klass)
           DEFAULT_GPU, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
 
   g_object_class_install_property (gobject_class, PROP_CHROME_EXTRA_FLAGS,
-                                   g_param_spec_string ("chrome_extra_flags", "chrome_extra_flags",
+                                   g_param_spec_string ("chromeExtraFlags", "chromeExtraFlags",
                                    "Comma delimiter flags to be passed into chrome (Example: show-fps-counter,remote-debugging-port=9222)",
-                                   nullptr, (GParamFlags) (GST_PARAM_MUTABLE_READY)));
+                                   nullptr, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
 
   gst_element_class_set_static_metadata (gstelement_class,
       "Chromium Embedded Framework source", "Source/Video",
