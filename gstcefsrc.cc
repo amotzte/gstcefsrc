@@ -337,7 +337,7 @@ class App : public CefApp
             gchar ** switchValue = g_strsplit((const gchar *) flagsList[i], "=", -1);
             if (g_strv_length (switchValue) > 1) {
                 GST_INFO ("Adding SwitchWithValue %s=%s", switchValue[0], switchValue[1]);
-                command_line->AppendSwitchWithValue(switchValue[0],switchValue[1]);
+                command_line->AppendSwitchWithValue(switchValue[0], switchValue[1]);
                 g_strfreev(switchValue);
             } else {
                 GST_INFO ("Adding flag %s", flagsList[i]);
@@ -777,7 +777,8 @@ gst_cef_src_class_init (GstCefSrcClass * klass)
 
   g_object_class_install_property (gobject_class, PROP_CHROMIUM_DEBUG_PORT,
     g_param_spec_int ("chromium-debug-port", "chromium-debug-port",
-          "Set chromium debug port (-1 = disabled)", -1, G_MAXUINT16,
+          "Set chromium debug port (-1 = disabled) "
+          "deprecated: use chrome-extra-flags instead", -1, G_MAXUINT16,
           DEFAULT_CHROMIUM_DEBUG_PORT, (GParamFlags) (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
 
   g_object_class_install_property (gobject_class, PROP_CHROME_EXTRA_FLAGS,
