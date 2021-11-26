@@ -327,15 +327,16 @@ class App : public CefApp
 
     if (src->chrome_extra_flags) {
         gchar ** flagsList = g_strsplit((const gchar *) src->chrome_extra_flags, ",", -1);
-        for (guint i=0 ; i<g_strv_length (flagsList) ; i++) {
+        guint i;
+        for (i=0 ; i<g_strv_length (flagsList) ; i++) {
 
             gchar ** switchValue = g_strsplit((const gchar *) flagsList[i], "=", -1);
             if (g_strv_length (switchValue) > 1) {
-                GST_INFO("Adding SwitchWithValue %s=%s", switchValue[0],switchValue[1]);
+                GST_INFO ("Adding SwitchWithValue %s=%s", switchValue[0], switchValue[1]);
                 command_line->AppendSwitchWithValue(switchValue[0],switchValue[1]);
                 g_strfreev(switchValue);
             } else {
-                GST_INFO("Adding flag %s", flagsList[i]);
+                GST_INFO ("Adding flag %s", flagsList[i]);
                 command_line->AppendSwitch(flagsList[i]);
             }
         }
